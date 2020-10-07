@@ -54,5 +54,3 @@ dkms.conf
 # Lets just leave this here
 kok/*
 
-# conversation logs and lecture recordings
-lectures/*
