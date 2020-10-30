@@ -139,7 +139,7 @@ sys-tick_constants.s
 ####################################################################
 
 C_FILES = $(notdir $(C_SRC) )
-S_FILES = $(notdir $(S_SRC) $(s_SRC) )
+S_FILES = $(notdir $(S_SRC) $(s_SRC) ) # is S_SRC even defined?!
 #make list of source paths, sort also removes duplicates
 C_PATHS = $(sort $(dir $(C_SRC) ) )
 S_PATHS = $(sort $(dir $(S_SRC) $(s_SRC) ) )
