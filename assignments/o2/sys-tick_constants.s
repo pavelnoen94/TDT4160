@@ -1,4 +1,4 @@
-// SysTick Base-addresse    
+// SysTick Base-addresse
 SYSTICK_BASE =  0xE000E010
 
 // ---[ Offset til sys-tick-registrene ]------------------------ //
@@ -11,7 +11,7 @@ SYSTICK_BASE =  0xE000E010
 
 // ---[ Hjelpekonstanter til sys-tick ]------------------------- //
     FREQUENCY = 14000000   // Antall klokkesignaler per sekund
-
+    CLOCK_PER_INTERRUPT = FREQUENCY/10
     // CTRL-register-masker
     SysTick_CTRL_CLKSOURCE_Msk = 0b100
     SysTick_CTRL_TICKINT_Msk   = 0b010

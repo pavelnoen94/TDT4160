@@ -65,8 +65,6 @@ ifeq (clean,$(findstring clean, $(MAKECMDGOALS)))
 endif
 
 
-
-
 ####################################################################
 # Flags                                                            #
 ####################################################################
@@ -167,31 +165,33 @@ release:  $(EXE_DIR)/$(PROJECTNAME).bin
 
 rammeverk:  $(OBJS)
 
+QUITE = @
+
 # Create objects from C SRC files
 $(OBJ_DIR)/%.o: %.c
 	@echo "Building file: $<"
-	$(CC) $(CFLAGS) $(INCLUDEPATHS) -c -o $@ $<
+	$(QUITE) $(CC) $(CFLAGS) $(INCLUDEPATHS) -c -o $@ $<
 
 # Assemble .s/.S files
 $(OBJ_DIR)/%.o: %.s
 	@echo "Assembling $<"
-	$(CC) $(ASMFLAGS) $(INCLUDEPATHS) -c -o $@ $<
+	$(QUITE) $(CC) $(ASMFLAGS) $(INCLUDEPATHS) -c -o $@ $<
 
 $(OBJ_DIR)/%.o: %.S
 	@echo "Assembling $<"
-	$(CC) $(ASMFLAGS) $(INCLUDEPATHS) -c -o $@ $<
+	$(QUITE) $(CC) $(ASMFLAGS) $(INCLUDEPATHS) -c -o $@ $<
 
 # Link
 $(EXE_DIR)/$(PROJECTNAME).out: $(STUDENT_OBJS) 
 	@echo "Linking target: $@"
-	$(CC) $(LDFLAGS) $(OBJS) $(STUDENT_OBJS) $(LIBS) -o $(EXE_DIR)/$(PROJECTNAME).out
+	$(QUITE) $(CC) $(LDFLAGS) $(OBJS) $(STUDENT_OBJS) $(LIBS) -o $(EXE_DIR)/$(PROJECTNAME).out
 
 # Create binary file
 $(EXE_DIR)/$(PROJECTNAME).bin: $(EXE_DIR)/$(PROJECTNAME).out
 	@echo "Creating binary file"
-	$(OBJCOPY) -O binary $(EXE_DIR)/$(PROJECTNAME).out $(EXE_DIR)/$(PROJECTNAME).bin
+	$(QUITE) $(OBJCOPY) -O binary $(EXE_DIR)/$(PROJECTNAME).out $(EXE_DIR)/$(PROJECTNAME).bin
 # Uncomment next line to produce assembly listing of entire program
-#	$(DUMP) -h -S -C $(EXE_DIR)/$(PROJECTNAME).out>$(LST_DIR)/$(PROJECTNAME)out.lst
+	$(QUITE) $(DUMP) -h -S -C $(EXE_DIR)/$(PROJECTNAME).out>$(LST_DIR)/$(PROJECTNAME)out.lst
 
 # Flash on!
 ifeq ($(f), 1)
@@ -200,8 +200,8 @@ endif
 
 clean:
 ifeq ($(filter $(MAKECMDGOALS),all debug release),)
-	$(RM) $(LST_DIR) $(EXE_DIR)
-	$(RM) $(STUDENT_OBJS)
+	$(QUITE) $(RM) $(LST_DIR) $(EXE_DIR)
+	$(QUITE) $(RM) $(STUDENT_OBJS)
 endif
 
 # include auto-generated dependency files (explicit rules)
